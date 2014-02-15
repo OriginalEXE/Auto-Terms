@@ -16,7 +16,7 @@ if ( ! class_exists( 'AtermsAdminScripts' ) ) :
 
 		public function enqueue_scripts( $hook ) {
 
-		    if( 'options-writing.php' !== $hook ) return; // we only want this script on Settings -> Writing page
+		    if( 'settings_page_auto-terms' !== $hook ) return; // we only want this script on Settings -> Writing page
 
 		    wp_enqueue_script( 'aterms_settings_script', ATERMS_JS_URL . 'settings.js', array( 'jquery' ), '0.0.1' );
 

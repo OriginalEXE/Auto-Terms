@@ -30,7 +30,9 @@ if ( ! class_exists( 'AtermsAdminQuery' ) ) :
 
 						if ( $taxonomy_obj->hierarchical ) {
 
-							$result[ $post_type ]['hierarchical'][ $taxonomy ] = array();
+							$taxonomy_obj->label = esc_attr( $taxonomy_obj->label );
+
+							$result[ $post_type ]['hierarchical'][ $taxonomy_obj->label ] = array();
 
 						} else {
 
@@ -46,7 +48,7 @@ if ( ! class_exists( 'AtermsAdminQuery' ) ) :
 
 							foreach ( $terms as $term ) {
 
-								$result[ $post_type ]['hierarchical'][ $taxonomy ][ $term->term_id ] = $term->name;
+								$result[ $post_type ]['hierarchical'][ $taxonomy_obj->label ][ $term->term_id ] = $term->name;
 
 							}
 
@@ -59,7 +61,7 @@ if ( ! class_exists( 'AtermsAdminQuery' ) ) :
 						|| ! isset ( $result[ $post_type ]['nonhierarchical'] )
 					) {
 
-						unset( $result[ $post_type ] ); // we don't wan't it! We need both hierarchical and non-hierarchical taxonomies
+						unset( $result[ $post_type ] ); // we don't want it! We need both hierarchical and non-hierarchical taxonomies
 
 					}
 

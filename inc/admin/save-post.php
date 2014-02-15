@@ -47,6 +47,8 @@ if ( ! class_exists( 'AtermsAdminSavePost' ) ) :
 
 			}
 
+			$post_taxonomies = array_filter( $post_taxonomies, 'is_taxonomy_hierarchical' ); // we only want hierarchical taxonomies!
+
 			$post_terms = wp_get_object_terms( $post_id, $post_taxonomies, array( 'fields' => 'ids' ) );
 
 			if ( empty( $post_terms ) ) {
@@ -59,7 +61,8 @@ if ( ! class_exists( 'AtermsAdminSavePost' ) ) :
 			$option_terms = get_option( 'aterms_terms_relationship_tax_input' );
 			$overwrite_terms = get_option( 'aterms_overwrite_terms' );
 
-			$i = 0;
+			$i = 0; // iterration that counts which term are we checking
+			$j = 0; // this one counts how many successful iterations there were (but is also 0 indexed)
 
 			foreach ( $option_taxonomies[ $post->post_type ] as $term_id ) {
 
@@ -84,7 +87,17 @@ if ( ! class_exists( 'AtermsAdminSavePost' ) ) :
 
 					$terms_to_set = explode( ',', $terms_to_set );
 
+					if ( $j ) { // $j is bigger than 0, means we already had one successful match
+
+						$overwrite_terms = false; // this will be turned to true in actual function call
+
+						$post_terms = array_merge( $post_terms, $terms_to_set );
+
+					}
+
 					wp_set_object_terms( $post_id, $terms_to_set, $option_targets[ $post->post_type ][ $i ], ! $overwrite_terms );
+
+					$j++;
 
 				}
 

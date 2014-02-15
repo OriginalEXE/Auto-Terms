@@ -27,7 +27,13 @@ jQuery( function( $ ) {
 
 					} else {
 
-						$this.text( $this.data( 'completed' ) ); // Request completed
+						$this.addClass( 'button-primary' ).text( $this.data( 'completed' ) ); // Request completed
+
+						setTimeout( function() {
+
+							window.location.reload( true );
+
+						}, 200 );
 
 					}
 
@@ -46,7 +52,14 @@ jQuery( function( $ ) {
 				$container = $this.parent(),
 				$containerWrap = $container.parent();
 
-			$container.after( $container.clone() );
+			var $clone = $container.clone();
+
+			$clone
+				.find( 'select, input' )
+				.val( '' );
+
+
+			$container.after( $clone );
 
 			$containerWrap.find( '.aterms-rule-remove' ).removeAttr( 'disabled' );
 

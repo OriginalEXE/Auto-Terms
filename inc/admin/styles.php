@@ -16,7 +16,7 @@ if ( ! class_exists( 'AtermsAdminStyles' ) ) :
 
 		public function enqueue_styles( $hook ) {
 
-		    if( 'options-writing.php' !== $hook ) return; // we only want this script on Settings -> Writing page
+		    if( 'settings_page_auto-terms' !== $hook ) return; // we only want this script on Settings -> Writing page
 
 		    wp_enqueue_style( 'aterms_settings_style', ATERMS_CSS_URL . 'settings.css', '0.0.1' );
 

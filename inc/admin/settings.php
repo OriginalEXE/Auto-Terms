@@ -10,24 +10,52 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 		public function __construct() {
 
+			add_action( 'admin_menu', array( $this, 'register_plugin_menu' ) );
 			add_action( 'admin_init', array( $this, 'register_plugin_settings' ) );
 
 		}
 
-		public function register_plugin_settings() { // register our settings section and place it Settings -> Writing
+		public function register_plugin_menu() { // Register new Auto Terms page under "Settings" menu
+
+			add_options_page( __( 'Auto Terms', 'aterms' ), __( 'Auto Terms', 'aterms' ), 'manage_options', 'auto-terms', array( $this, 'register_plugin_menu_callback' ) );
+
+		}
+
+		public function register_plugin_menu_callback() {
+
+			?>
+
+			<div class="wrap">
+				<h2><?php _e( 'Auto Terms Plugin', 'aterms' ); ?></h2>
+
+				<form method="post" action="options.php"> 
+
+					<?php settings_fields( 'auto-terms' ); ?>
+					<?php do_settings_sections( 'auto-terms' ); ?>
+
+					<?php submit_button(); ?>
+
+				</form>
+			</div>			
+
+			<?php
+
+		}
+
+		public function register_plugin_settings() { // register our settings section and place it Settings -> Auto Terms
 
 			add_settings_section(
 				'aterms_auto_terms_section',
 				__( 'Auto Terms', 'aterms' ),
 				array( $this, 'auto_terms_section_callback' ),
-				'writing'
+				'auto-terms'
 			);
 
 			add_settings_field(	
 				'aterms_overwrite_terms',
 				__( 'Overwrite terms', 'aterms' ),
 				array( $this, 'overwrite_terms_callback' ),
-				'writing',
+				'auto-terms',
 				'aterms_auto_terms_section',
 				array(
 					__( 'If checked, plugin will overwrite terms based on relationship, instead of appending.', 'aterms' ),
@@ -38,10 +66,10 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 				'aterms_clear_cache',
 				__( 'Clear cache', 'aterms' ),
 				array( $this, 'clear_cache_callback' ),
-				'writing',
+				'auto-terms',
 				'aterms_auto_terms_section',
 				array(
-					__( 'Plugin caches the list of terms/taxonomies. If you don\'t see your term/taxonomy in the list below, click this button, then refresh after confirmation.', 'aterms' ),
+					__( 'Plugin caches the list of terms/taxonomies. If you don\'t see your term/taxonomy in the list below, click this button. NOTE: After completion, window will refresh, make sure you save your settings first.', 'aterms' ),
 				)
 			);
 
@@ -49,7 +77,7 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 				'aterms_terms_relationship',
 				__( 'Term relationship', 'aterms' ),
 				array( $this, 'terms_relationship_callback' ),
-				'writing',
+				'auto-terms',
 				'aterms_auto_terms_section',
 				array(
 					__( 'Set up a terms relationship.', 'aterms' ),
@@ -57,23 +85,23 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 			);
 
 			register_setting(
-				'writing',
+				'auto-terms',
 				'aterms_overwrite_terms',
 				'intval'
 			);
 
 			register_setting(
-				'writing',
+				'auto-terms',
 				'aterms_terms_relationship_taxonomies'
 			);
 
 			register_setting(
-				'writing',
+				'auto-terms',
 				'aterms_terms_relationship_targets'
 			);
 
 			register_setting(
-				'writing',
+				'auto-terms',
 				'aterms_terms_relationship_tax_input'
 			);
 
@@ -111,7 +139,7 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 			$html .= '<button id="aterms_clear_cache" class="button" data-completed="' . __( 'Cleared!', 'aterms' ) . '" data-failed="' . __( 'Failed!', 'aterms' ) . '">' . __( 'Clear cache', 'aterms' ) . '</button><br>';
 
-			$html .= '<p class="description">' . $args[0] . '</p></label>';
+			$html .= '</label><p class="description">' . $args[0] . '</p>';
 
 			echo $html;
 
@@ -149,7 +177,9 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 				echo '<div class="aterms-relationship-wrap-' . $post_type . '" data-posttype="' . $post_type . '">';
 
-				echo '<h4>' . $post_type . '</h4>';
+				$post_type_object = get_post_type_object( $post_type );
+
+				echo '<h4>' . $post_type_object->label . '</h4>';
 
 				$output_taxonomies = '<select class="aterms-terms-relationship-taxonomies" name="aterms_terms_relationship_taxonomies[' . $post_type . '][]">';
 				$output_targets    = '<select class="aterms-terms-relationship-targets" name="aterms_terms_relationship_targets[' . $post_type . '][]">';
