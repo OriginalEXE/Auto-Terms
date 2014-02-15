@@ -1,0 +1,42 @@
+.aterms-relationship-wrap > div:first-child h4 {
+	margin-top: 5px;
+}
+
+.aterms-terms-relationship-rule > * {
+	display: inline-block;
+	margin: 0 4px 0 0;
+	vertical-align: middle;
+}
+
+.aterms-terms-relationship-rule > input[type="text"] {
+	line-height: 20px;
+}
+
+.aterms-terms-relationship-rule > span {
+	margin: 0 8px 0 4px;
+}
+
+.aterms-terms-relationship-rule > button.aterms-rule-add,
+.aterms-terms-relationship-rule > button.aterms-rule-remove,
+.aterms-terms-relationship-rule > button.aterms-rule-move-up,
+.aterms-terms-relationship-rule > button.aterms-rule-move-down {
+	margin: 0 5px;
+	min-width: 30px;
+	text-align: center;
+}
+
+.aterms-terms-relationship-rule {
+	margin-bottom: 8px;
+}
+
+.aterms-terms-relationship-taxonomies {
+	min-width: 170px;
+}
+
+.aterms-terms-relationship-targets {
+	min-width: 140px;
+}
+
+.aterms-terms-relationship-tax-input {
+	min-width: 250px;
+}
