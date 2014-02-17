@@ -136,7 +136,8 @@ jQuery( function( $ ) {
 
 		if ( ! $options.length ) return; // nothing is saved
 
-		var option = {};
+		var option = {},
+			count = 0;
 
 		option['taxonomies'] = $options.data( 'option-taxonomies' );
 		option['targets'] = $options.data( 'option-targets' );
@@ -144,23 +145,37 @@ jQuery( function( $ ) {
 
 		$.each( option['taxonomies'], function( i, id ) {
 
-			var $template = $rule.clone();
+			var $template = $rule.clone(),
+				$taxonomies = $template.find( '.aterms-terms-relationship-taxonomies option[value="' + id + '"]' ),
+				$targets = $template.find( '.aterms-terms-relationship-targets option[value="' + option['targets'][ i ] + '"]' ),
+				$taxInput = $template.children( '.aterms-terms-relationship-tax-input' );
 
-			$template
-				.find( '.aterms-terms-relationship-taxonomies option[value="' + id + '"]' )
-					.prop( 'selected', 'selected' )
-					.end()
-				.find( '.aterms-terms-relationship-targets option[value="' + option['targets'][ i ] + '"]' )
-					.prop( 'selected', 'selected' )
-					.end()
-				.children( '.aterms-terms-relationship-tax-input' )
-					.val( option['terms'][ i ] );
+			if (
+				   ! $taxonomies.length
+				|| ! $targets.length
+			) {
+
+				return; // some taxonomy or term got deleted, this option is no longer valid
+
+			}
+
+
+
+			$taxonomies.prop( 'selected', 'selected' );
+			$targets.prop( 'selected', 'selected' );
+			$taxInput.val( option['terms'][ i ] );
 
 			$this.append( $template );
 
+			count++;
+
 		});
 
-		$rule.remove();
+		if ( count ) {
+
+			$rule.remove();
+
+		}
 
 	});
 

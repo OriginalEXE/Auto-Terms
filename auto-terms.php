@@ -82,13 +82,14 @@ final class AutoTerms {
 				require_once ATERMS_PLUGIN_DIR_INC . 'admin/scripts.php';
 				require_once ATERMS_PLUGIN_DIR_INC . 'admin/styles.php';
 				require_once ATERMS_PLUGIN_DIR_INC . 'admin/query.php';
-				require_once ATERMS_PLUGIN_DIR_INC . 'admin/save-post.php';
 
 			}
 
 			require_once ATERMS_PLUGIN_DIR_INC . 'admin/ajax.php';
 
 		}
+
+		require_once ATERMS_PLUGIN_DIR_INC . 'admin/save-post.php';
 
 	}
 

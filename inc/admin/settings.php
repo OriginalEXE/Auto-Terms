@@ -46,7 +46,7 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 			add_settings_section(
 				'aterms_auto_terms_section',
-				__( 'Auto Terms', 'aterms' ),
+				'',
 				array( $this, 'auto_terms_section_callback' ),
 				'auto-terms'
 			);
@@ -113,7 +113,7 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 		public function auto_terms_section_callback() {
 
-			_e( 'Auto Terms configuration', 'aterms' );
+			_e( 'Connect and auto assign (non hierarchical) terms to posts in specified (hierarchical) terms', 'aterms' );
 
 		}
 

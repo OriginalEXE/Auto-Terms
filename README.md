@@ -3,4 +3,4 @@ Auto-Terms
 
 WordPress Auto Terms plugin
 
-Description: Connect and auto assign terms to posts in specified taxonomies
+Description: Connect and auto assign (non hierarchical) terms to posts in specified (hierarchical) terms.
