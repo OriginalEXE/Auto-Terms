@@ -105,6 +105,8 @@ final class AutoTerms {
 
 		$lang_dir = apply_filters( 'aterms_textdomain_location', $lang_dir );
 
+		var_dump( $lang_dir );
+
 		load_plugin_textdomain( 'aterms', false, $lang_dir );	
 
 	}
