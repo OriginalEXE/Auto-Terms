@@ -31,7 +31,7 @@ jQuery( function( $ ) {
 
 						setTimeout( function() {
 
-							//window.location.reload( true );
+							window.location.reload( true );
 
 						}, 200 );
 
