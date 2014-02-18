@@ -4,9 +4,9 @@
 ! defined( 'ABSPATH' ) && exit;
 
 // Check if class apready exists
-if ( ! class_exists( 'AtermsAdminSavePost' ) ) :
+if ( ! class_exists( 'AtermsSavePost' ) ) :
 
-	class AtermsAdminSavePost {
+	class AtermsSavePost {
 
 		private static $prefix;
 
@@ -134,4 +134,4 @@ if ( ! class_exists( 'AtermsAdminSavePost' ) ) :
 
 endif; // End "if ! class exists" check
 
-new AtermsAdminSavePost();
+new AtermsSavePost();

@@ -95,7 +95,7 @@ final class AutoTerms {
 
 		}
 
-		require_once ATERMS_PLUGIN_DIR_INC . 'admin/save-post.php';
+		require_once ATERMS_PLUGIN_DIR_INC . 'save-post.php';
 
 	}
 
@@ -104,8 +104,6 @@ final class AutoTerms {
 		$lang_dir = dirname( plugin_basename( ATERMS_PLUGIN_FILE ) ) . '/languages/';
 
 		$lang_dir = apply_filters( 'aterms_textdomain_location', $lang_dir );
-
-		var_dump( $lang_dir );
 
 		load_plugin_textdomain( 'aterms', false, $lang_dir );	
 
