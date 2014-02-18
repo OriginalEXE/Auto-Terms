@@ -109,7 +109,7 @@ final class AutoTerms {
 
 	}
 
-	public function set_prefix() {
+	public static function set_prefix() {
 
 		self::$prefix = ( defined( 'ICL_LANGUAGE_CODE' ) ) ? esc_attr( ICL_LANGUAGE_CODE ) . '_' : '';
 

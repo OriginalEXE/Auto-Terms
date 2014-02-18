@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Auto Terms\n"
 "POT-Creation-Date: 2014-02-18 01:47-0800\n"
-"PO-Revision-Date: 2014-02-18 02:29+0100\n"
+"PO-Revision-Date: 2014-02-18 12:37+0100\n"
 "Last-Translator: OriginalEXE <antesepic@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -24,17 +24,19 @@ msgstr ""
 
 #: inc/admin/settings.php:31
 msgid "Auto Terms Plugin"
-msgstr ""
+msgstr "Auto Terms dodatak"
 
 #: inc/admin/settings.php:60
 msgid "Overwrite terms"
-msgstr ""
+msgstr "Prebriši 'term'-ove"
 
 #: inc/admin/settings.php:65
 msgid ""
 "If checked, plugin will overwrite terms based on relationship, instead of "
 "appending."
 msgstr ""
+"Ako je ovo označeno, umjesto prepisivanja 'term'-ova, dodatak će ih samo "
+"nadodati na postojeće."
 
 #: inc/admin/settings.php:71 inc/admin/settings.php:144
 msgid "Clear cache"
@@ -46,20 +48,26 @@ msgid ""
 "taxonomy in the list below, click this button. NOTE: After completion, "
 "window will refresh, make sure you save your settings first."
 msgstr ""
+"Dodatak sprema listu 'terms/taxonomies' u privremenu memoriju. Ukoliko nešto "
+"nije na listi a trebalo bi biti, kliknite ovaj gumb. NAPOMENA: Nakon "
+"završetka, stranica će se osvježiti, prvo spremite trenutne postavke da se "
+"ne izgube."
 
 #: inc/admin/settings.php:82
 msgid "Term relationship"
-msgstr ""
+msgstr "Relacija 'terms'a."
 
 #: inc/admin/settings.php:87
 msgid "Set up a terms relationship."
-msgstr ""
+msgstr "Postavke relacije 'terms'-a."
 
 #: inc/admin/settings.php:120
 msgid ""
 "Connect and auto assign (non hierarchical) terms to posts in specified "
 "(hierarchical) terms"
 msgstr ""
+"Povežite i automatski dodjelite (ne-hijerarhijske) 'terms' postovima u "
+"određenim (hijerarhijskim) 'terms'."
 
 #: inc/admin/settings.php:144
 msgid "Cleared!"
@@ -87,4 +95,4 @@ msgstr "Ako misliš da je došlo do greške, kontaktiraj developera!"
 
 #: inc/admin/settings.php:214
 msgid "Terms separated by comma."
-msgstr ""
+msgstr "'Terms' odvojeni zarezom."
