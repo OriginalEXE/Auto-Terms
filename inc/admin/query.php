@@ -8,9 +8,13 @@ if ( ! class_exists( 'AtermsAdminQuery' ) ) :
 
 	class AtermsAdminQuery {
 
+		private static $prefix;
+
 		public static function generate_terms_object() {
 
-				$cached = get_transient( 'aterms_terms_query' );
+				self::$prefix = AutoTerms::$prefix;
+
+				$cached = get_transient( self::$prefix . 'aterms_terms_query' );
 
 				if ( $cached ) return $cached; // cache got it covered, pheeew
 
@@ -67,7 +71,7 @@ if ( ! class_exists( 'AtermsAdminQuery' ) ) :
 
 				}
 
-				set_transient( 'aterms_terms_query', $result, DAY_IN_SECONDS );
+				set_transient( self::$prefix . 'aterms_terms_query', $result, DAY_IN_SECONDS );
 
 				return $result;
 

@@ -8,6 +8,8 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 	class AtermsAdminSettings {
 
+		private static $prefix;
+
 		public function __construct() {
 
 			add_action( 'admin_menu', array( $this, 'register_plugin_menu' ) );
@@ -43,6 +45,8 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 		}
 
 		public function register_plugin_settings() { // register our settings section and place it Settings -> Auto Terms
+
+			self::$prefix = AutoTerms::$prefix;
 
 			add_settings_section(
 				'aterms_auto_terms_section',
@@ -86,23 +90,23 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 			register_setting(
 				'auto-terms',
-				'aterms_overwrite_terms',
+				self::$prefix . 'aterms_overwrite_terms',
 				'intval'
 			);
 
 			register_setting(
 				'auto-terms',
-				'aterms_terms_relationship_taxonomies'
+				self::$prefix . 'aterms_terms_relationship_taxonomies'
 			);
 
 			register_setting(
 				'auto-terms',
-				'aterms_terms_relationship_targets'
+				self::$prefix . 'aterms_terms_relationship_targets'
 			);
 
 			register_setting(
 				'auto-terms',
-				'aterms_terms_relationship_tax_input'
+				self::$prefix . 'aterms_terms_relationship_tax_input'
 			);
 
 		}
@@ -125,7 +129,7 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 			$html = '<label for="aterms_overwrite_terms">';
 
-			$html .= '<input type="checkbox" id="aterms_overwrite_terms" name="aterms_overwrite_terms" value="1" ' . checked( 1, get_option('aterms_overwrite_terms'), false ) . '>';
+			$html .= '<input type="checkbox" id="aterms_overwrite_terms" name="' . self::$prefix . 'aterms_overwrite_terms" value="1" ' . checked( 1, get_option( self::$prefix . 'aterms_overwrite_terms' ), false ) . '>';
 
 			$html .= ' ' . $args[0] . '</label>';
 
@@ -169,9 +173,9 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 		public function relationship_output( $query ) {
 
-			$option_taxonomies = get_option( 'aterms_terms_relationship_taxonomies' );
-			$option_targets = get_option( 'aterms_terms_relationship_targets' );
-			$option_terms = get_option( 'aterms_terms_relationship_tax_input' );
+			$option_taxonomies = get_option( self::$prefix . 'aterms_terms_relationship_taxonomies' );
+			$option_targets = get_option( self::$prefix . 'aterms_terms_relationship_targets' );
+			$option_terms = get_option( self::$prefix . 'aterms_terms_relationship_tax_input' );
 
 			foreach ( $query as $post_type => $taxonomies ) {
 
@@ -181,8 +185,8 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 				echo '<h4>' . $post_type_object->label . '</h4>';
 
-				$output_taxonomies = '<select class="aterms-terms-relationship-taxonomies" name="aterms_terms_relationship_taxonomies[' . $post_type . '][]">';
-				$output_targets    = '<select class="aterms-terms-relationship-targets" name="aterms_terms_relationship_targets[' . $post_type . '][]">';
+				$output_taxonomies = '<select class="aterms-terms-relationship-taxonomies" name="' . self::$prefix . 'aterms_terms_relationship_taxonomies[' . $post_type . '][]">';
+				$output_targets    = '<select class="aterms-terms-relationship-targets" name="' . self::$prefix . 'aterms_terms_relationship_targets[' . $post_type . '][]">';
 
 				foreach ( $taxonomies['hierarchical'] as $taxonomy => $terms ) {
 
@@ -207,7 +211,7 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 				$output_taxonomies .= '</select>';
 
-				$output_tax_input = '<input class="aterms-terms-relationship-tax-input" name="aterms_terms_relationship_tax_input[' . $post_type . '][]" type="text" placeholder="' . __( 'Terms separated by comma.', 'aterms' ) . '">';
+				$output_tax_input = '<input class="aterms-terms-relationship-tax-input" name="' . self::$prefix . 'aterms_terms_relationship_tax_input[' . $post_type . '][]" type="text" placeholder="' . __( 'Terms separated by comma.', 'aterms' ) . '">';
 
 				echo '<div class="aterms-terms-relationship-rule">'
 				. $output_taxonomies . '<span> &rarr; </span>'

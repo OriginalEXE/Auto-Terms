@@ -8,6 +8,8 @@ if ( ! class_exists( 'AtermsAdminSavePost' ) ) :
 
 	class AtermsAdminSavePost {
 
+		private static $prefix;
+
 		public function __construct() {
 
 			add_action( 'save_post', array( $this, 'save_post_hook' ), 10, 2 );
@@ -15,6 +17,8 @@ if ( ! class_exists( 'AtermsAdminSavePost' ) ) :
 		}
 
 		public function save_post_hook( $post_id, $post ) {
+
+			self::$prefix = AutoTerms::$prefix;
 
 			if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 
@@ -31,7 +35,7 @@ if ( ! class_exists( 'AtermsAdminSavePost' ) ) :
 
 			}
 
-			$option_taxonomies = get_option( 'aterms_terms_relationship_taxonomies' );
+			$option_taxonomies = get_option( self::$prefix . 'aterms_terms_relationship_taxonomies' );
 
 			if ( empty( $option_taxonomies[ $post->post_type ] ) ) {
 
@@ -51,7 +55,7 @@ if ( ! class_exists( 'AtermsAdminSavePost' ) ) :
 
 			$post_terms = wp_get_object_terms( $post_id, $post_taxonomies, array( 'fields' => 'ids' ) );
 
-			$overwrite_terms = get_option( 'aterms_overwrite_terms' );
+			$overwrite_terms = get_option( self::$prefix . 'aterms_overwrite_terms' );
 
 			$clean_terms = false; // whether plugin should clear all non-hierarchical taxonomies. Will be set to true if $overwrite_terms === true and there are no taxonomies
 
@@ -69,8 +73,8 @@ if ( ! class_exists( 'AtermsAdminSavePost' ) ) :
 
 			}
 
-			$option_targets = get_option( 'aterms_terms_relationship_targets' );
-			$option_terms = get_option( 'aterms_terms_relationship_tax_input' );
+			$option_targets = get_option( self::$prefix . 'aterms_terms_relationship_targets' );
+			$option_terms = get_option( self::$prefix . 'aterms_terms_relationship_tax_input' );
 
 			$i = 0; // iterration that counts which term are we checking
 			$j = 0; // this one counts how many successful iterations there were (but is also 0 indexed)

@@ -20,6 +20,9 @@ final class AutoTerms {
 	// Will hold the only instance of our main plugin class
 	private static $instance;
 
+	// Holds prefix, used for wpml compatibility
+	public static $prefix;
+
 	// Instantiate the class and set up stuff
 	public static function instantiate() {
 
@@ -31,6 +34,9 @@ final class AutoTerms {
 
 			// load textdomain
 			add_action( 'plugins_loaded', array( 'AutoTerms', 'load_textdomain' ) );
+
+			// set prefix (WPML compatibility)
+			add_action( 'plugins_loaded', array( 'AutoTerms', 'set_prefix' ) );
 
 		}
 
@@ -100,6 +106,12 @@ final class AutoTerms {
 		$lang_dir = apply_filters( 'aterms_textdomain_location', $lang_dir );
 
 		load_plugin_textdomain( 'aterms', false, $lang_dir );	
+
+	}
+
+	public function set_prefix() {
+
+		self::$prefix = ( defined( 'ICL_LANGUAGE_CODE' ) ) ? esc_attr( ICL_LANGUAGE_CODE ) . '_' : '';
 
 	}
 
