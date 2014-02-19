@@ -141,7 +141,7 @@ if ( ! class_exists( 'AtermsAdminSettings' ) ) :
 
 			$html = '<label for="aterms_clear_cache">';
 
-			$html .= '<button id="aterms_clear_cache" class="button" data-completed="' . __( 'Cleared!', 'aterms' ) . '" data-failed="' . __( 'Failed!', 'aterms' ) . '">' . __( 'Clear cache', 'aterms' ) . '</button><br>';
+			$html .= '<button id="aterms_clear_cache" class="button" data-prefix="' . self::$prefix . '" data-completed="' . __( 'Cleared!', 'aterms' ) . '" data-failed="' . __( 'Failed!', 'aterms' ) . '">' . __( 'Clear cache', 'aterms' ) . '</button><br>';
 
 			$html .= '</label><p class="description">' . $args[0] . '</p>';
 

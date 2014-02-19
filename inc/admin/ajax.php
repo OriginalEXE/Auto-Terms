@@ -8,7 +8,7 @@ if ( ! class_exists( 'AtermsAdminAjax' ) ) :
 
 	class AtermsAdminAjax {
 
-		private static $prefix;
+		public static $prefix;
 
 		public function __construct() {
 
@@ -18,13 +18,13 @@ if ( ! class_exists( 'AtermsAdminAjax' ) ) :
 
 		public function clear_cache() {
 
-			self::$prefix = AutoTerms::$prefix;
+			self::$prefix = ! empty( $_POST['prefix'] ) ? esc_attr( $_POST['prefix'] ) : '';
 
 			check_ajax_referer( 'aterms_clear_cache_nonce', 'nonce', false ); // no nonce, no fun!
 
 			delete_transient( self::$prefix . 'aterms_terms_query' );
 
-			echo '1';
+			echo '1' . self::$prefix;
 
 			die(); // Now, young Skywalker… you will die.
 		}

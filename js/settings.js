@@ -17,7 +17,8 @@ jQuery( function( $ ) {
 				ajaxurl,
 				{
 					action: 'aterms_clear_cache',
-					nonce : aterms.nonce
+					nonce : aterms.nonce,
+					prefix: $this.data( 'prefix' )
 				},
 				function( response ) {
 

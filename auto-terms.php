@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Auto Terms
  * Plugin URI: http://profiles.wordpress.org/originalexe
- * Description: Connect and auto assign terms to posts in specified taxonomies
+ * Description: Connect and auto assign terms to posts in specified taxonomies.
  * Author: OriginalEXE
  * Author URI: http://profiles.wordpress.org/originalexe
  * Version: 0.0.1
